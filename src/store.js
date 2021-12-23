@@ -1,18 +1,17 @@
 import { createStore  } from "redux";
 
 
-
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-export const addToDo = (text) => {
+ const addToDo = text => {
     return {
         type : ADD ,
         text
     }
 }
 
-export const deleteToDo = (id) => {
+ const deleteToDo = id => {
     return {
         type: DELETE,
         id
@@ -21,12 +20,12 @@ export const deleteToDo = (id) => {
 
 
 const reducer = (state=[], action) => {
-    console.log("action.id", action.id)
+    //console.log("action.id", action.id)
     switch (action.type) {
-        case ADD :
+        case ADD:
             return [{text:action.text, id: Date.now()}, ...state]
         
-        case DELETE :
+        case DELETE:
             return state.filter(toDo => toDo !== action.id);
 
         default :
@@ -38,6 +37,12 @@ const reducer = (state=[], action) => {
 
 const store = createStore(reducer);
 
-store.subscribe() 
+
+store.subscribe();
+
+export const actionCreators = {
+    addToDo,
+    deleteToDo
+}
 
 export default store; 
